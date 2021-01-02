@@ -1,12 +1,12 @@
 import React from 'react'
 import GlobalStyle from '@styles/globalStyle'
-import MainLayout from '@pages/Layout/MainLayout'
+import MainRoutes from './Routes'
 
 const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
-      <MainLayout />
+      <MainRoutes />
     </>
   )
 }
