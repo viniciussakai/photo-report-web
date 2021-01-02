@@ -1,16 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src",
-    "paths": {
-      "@assets": ["./assets/*"],
-      "@components/*": ["./components/*"],
-      "@config/*": ["./config/*"],
-      "@pages": ["./pages/*"],
-      "@services": ["./services/*"],
-      "@styles": ["./styles/*"]
-    },
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -25,5 +20,8 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "extends": "./tsconfig.paths.json"
 }
