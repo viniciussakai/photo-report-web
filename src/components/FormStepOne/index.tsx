@@ -13,7 +13,7 @@ import { getEditorData } from 'utils/report'
 import { Container, Editor, EditorContainer, FormOne, Inputs } from './styles'
 
 interface FormData {
-  costumerId: string
+  costumer: string
   reference: string
   location: string
 }
@@ -28,14 +28,16 @@ const FormStepOne: React.FC = () => {
   const handleSubmit: SubmitHandler<FormData> = data => {
     const observationData = getEditorData(editorRef)
 
-    const { costumerId, location, reference } = data
+    const { costumer, location, reference } = data
+
+    const observation = JSON.stringify(observationData, null, 4)
 
     setReport({
       ...report,
-      costumer: Number(costumerId),
+      costumer: Number(costumer),
       location,
       reference,
-      observation: `${observationData}`
+      observation
     })
 
     navigate('/report/create/step2')
@@ -56,7 +58,7 @@ const FormStepOne: React.FC = () => {
       <FormOne onSubmit={handleSubmit}>
         <Inputs>
           <Select
-            name="costumerId"
+            name="costumer"
             options={costumers.map((costumer: ICostumer) => ({
               label: costumer.name,
               value: `${costumer.id}`
@@ -64,7 +66,7 @@ const FormStepOne: React.FC = () => {
             placeholder={'Cliente'}
             isSearchable
           />
-          <Input name="localization" label="Local" variant="outlined" />
+          <Input name="location" label="Local" variant="outlined" />
           <Input name="reference" label="Referencia" variant="outlined" />
           <EditorContainer>
             <Editor

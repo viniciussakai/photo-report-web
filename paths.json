@@ -8,7 +8,7 @@
       "types/*": ["./types/*"],
       "config/*": ["./config/*"],
       "pages/*": ["./pages/*"],
-      "services/*": ["./services/*"],
+      "service/*": ["./service/*"],
       "styles/*": ["./styles/*"],
       "utils/*": ["./utils/*"]
     }
