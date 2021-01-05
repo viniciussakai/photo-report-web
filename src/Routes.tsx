@@ -1,12 +1,22 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import MainLayout from '@pages/Layout/MainLayout'
+import ReportProvider from 'context/ReportContext'
+import MainLayout from 'pages/Layout/MainLayout'
+import StepOne from 'pages/Report/StepOne'
 
 const MainRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainLayout />} />
+        <Route path="/" element={<MainLayout />}>
+          <ReportProvider>
+            <Route path="/report">
+              <Route path="/create">
+                <Route path="/step1" element={<StepOne />} />
+              </Route>
+            </Route>
+          </ReportProvider>
+        </Route>
       </Routes>
     </Router>
   )

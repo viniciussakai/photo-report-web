@@ -20,6 +20,7 @@ const ReportProvider: React.FC = ({ children }) => {
     consideration: '',
     costumer: 0
   })
+
   const [reportItems, setReportItems] = useState<IReportItems[]>([])
   const [selectedItem, setSelectedItem] = useState(-1)
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalStyle from '@styles/globalStyle'
+import GlobalStyle from 'styles/globalStyle'
 import MainRoutes from './Routes'
 
 const App: React.FC = () => {
