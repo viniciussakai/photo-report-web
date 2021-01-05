@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState } from 'react'
-import { Report, IReportItems } from 'types/report'
+import { Report, IReportItem } from 'types/report'
 
 export type IReportContext = {
   report: Report
   setReport: React.Dispatch<React.SetStateAction<Report>>
-  reportItems: IReportItems[]
-  setReportItems: React.Dispatch<React.SetStateAction<IReportItems[]>>
+  reportItems: IReportItem[]
+  setReportItems: React.Dispatch<React.SetStateAction<IReportItem[]>>
   selectedItem: number
   setSelectedItem: React.Dispatch<React.SetStateAction<number>>
 }
@@ -21,7 +21,7 @@ const ReportProvider: React.FC = ({ children }) => {
     costumer: 0
   })
 
-  const [reportItems, setReportItems] = useState<IReportItems[]>([])
+  const [reportItems, setReportItems] = useState<IReportItem[]>([])
   const [selectedItem, setSelectedItem] = useState(-1)
 
   return (

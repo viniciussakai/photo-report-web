@@ -12,13 +12,15 @@ export interface Report {
   reportImage?: ReportItem[]
 }
 
-export interface IReportItems {
+export interface IReportItem {
   id: string
-  uploadedFile?: {
-    file: File
-    name: string
-    readableSize: number
-    preview: string
-  }
+  uploadedFile?: IUploadFile
   subtitle: string
+}
+
+export interface IUploadFile {
+  file: File
+  name: string
+  readableSize: number
+  preview: string
 }

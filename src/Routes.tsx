@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ReportProvider from 'context/ReportContext'
 import MainLayout from 'pages/Layout/MainLayout'
 import StepOne from 'pages/Report/StepOne'
+import StepTwo from 'pages/Report/StepTwo'
 
 const MainRoutes: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const MainRoutes: React.FC = () => {
             <Route path="/report">
               <Route path="/create">
                 <Route path="/step1" element={<StepOne />} />
+                <Route path="/step2" element={<StepTwo />} />
               </Route>
             </Route>
           </ReportProvider>

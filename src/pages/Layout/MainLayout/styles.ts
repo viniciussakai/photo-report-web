@@ -54,5 +54,4 @@ export const NavItem = styled.a<INavItem>`
 export const MainContent = styled.div`
   width: 100%;
   height: 90%;
-  padding: 40px;
 `
