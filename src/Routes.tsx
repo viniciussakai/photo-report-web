@@ -5,6 +5,7 @@ import MainLayout from 'pages/Layout/MainLayout'
 import StepOne from 'pages/Report/StepOne'
 import StepTwo from 'pages/Report/StepTwo'
 import StepThree from 'pages/Report/StepThree'
+import Reports from 'pages/Report/Reports'
 
 const MainRoutes: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const MainRoutes: React.FC = () => {
         <Route path="/" element={<MainLayout />}>
           <ReportProvider>
             <Route path="/report">
+              <Route path="/" element={<Reports />} />
               <Route path="/create">
                 <Route path="/step1" element={<StepOne />} />
                 <Route path="/step2" element={<StepTwo />} />

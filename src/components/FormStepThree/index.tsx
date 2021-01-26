@@ -1,54 +1,64 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { useNavigate } from 'react-router-dom'
-import { getEditorData, saveReport } from 'utils/report'
+import { getEditorData, saveReport, setEditorData } from 'utils/report'
 import { Button } from 'components/UI'
-import { Container, FormTwo, EditorContainer, Editor, Editors } from './styles'
+import { Container, FormTwo, EditorContainer, Editor } from './styles'
 import { IReportContext, useReportContext } from 'context/ReportContext'
 
 const FormStepThree: React.FC = () => {
   const { report, setReport } = useReportContext() as IReportContext
   const navigate = useNavigate()
 
-  const considerationRef = useRef(null)
-  const recomendationRef = useRef(null)
+  const endTextRef = useRef(null)
 
-  const handleSave = async () => {
-    const considerationData = getEditorData(considerationRef)
-    const recomendationData = getEditorData(recomendationRef)
+  const addToReport = () => {
+    const endTextData = getEditorData(endTextRef)
 
-    const recomendation = JSON.stringify(recomendationData, null, 4)
-    const consideration = JSON.stringify(considerationData, null, 4)
+    const endText = JSON.stringify(endTextData, null, 4)
 
     setReport({
       ...report,
-      consideration,
-      recomendation
+      endText
+    })
+  }
+
+  const handleSave = () => {
+    const endTextData = getEditorData(endTextRef)
+
+    const endText = JSON.stringify(endTextData, null, 4)
+
+    setReport({
+      ...report,
+      endText
     })
 
     saveReport(report)
-
     navigate('/report/')
   }
+
+  useEffect(() => {
+    if (report.endText) {
+      setEditorData(endTextRef, JSON.parse(report.endText))
+    }
+  }, [report.endText])
+
   return (
     <Container>
       <FormTwo onSubmit={handleSave}>
-        <Editors>
-          <EditorContainer>
-            <Editor
-              ref={considerationRef}
-              theme="snow"
-              placeholder={'Considerações'}
-            />
-          </EditorContainer>
-          <EditorContainer>
-            <Editor
-              ref={recomendationRef}
-              theme="snow"
-              placeholder={'Recomendações'}
-            />
-          </EditorContainer>
-        </Editors>
+        <EditorContainer>
+          <Editor ref={endTextRef} theme="snow" placeholder={'Considerações'} />
+        </EditorContainer>
+        <Button
+          size={'large'}
+          onClick={() => {
+            addToReport()
+            navigate('/report/create/step2')
+          }}
+          color="default"
+        >
+          Voltar
+        </Button>
         <Button type="submit" size={'large'}>
           Salvar
         </Button>

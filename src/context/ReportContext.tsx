@@ -13,13 +13,9 @@ export type IReportContext = {
 const ReportContext = createContext({})
 const ReportProvider: React.FC = ({ children }) => {
   const [report, setReport] = useState<Report>({
-    reference: '',
-    location: '',
-    observation: '',
-    recomendation: '',
-    consideration: '',
+    id: 0,
     costumer: 0
-  })
+  } as Report)
 
   const [reportItems, setReportItems] = useState<IReportItem[]>([])
   const [selectedItem, setSelectedItem] = useState(-1)

@@ -8,11 +8,18 @@ export const isValidData = (editorData: DeltaStatic | undefined) => {
   return editorData?.length() === 1
 }
 
-export const getEditorData = (ref: React.RefObject<ReactQuill>) => {
-  const editor = ref.current?.getEditor()
-  return editor?.getContents()
+export const getEditorData = (ref: React.RefObject<any>) => {
+  const editor = ref.current.getEditor()
+  return editor.getContents()
 }
 
+export const setEditorData = (
+  ref: React.RefObject<ReactQuill>,
+  editorData: DeltaStatic
+) => {
+  const editor = ref.current?.getEditor()
+  return editor?.setContents(editorData)
+}
 const appendItem = (item: ReportItem, formData: FormData) => {
   const arquivo = item.image || 'sem-imagem'
   formData.append('files', arquivo, item.image?.name)
@@ -24,22 +31,24 @@ export const saveReport = async (report: Report) => {
     const formData = new FormData()
     const {
       costumer,
-      consideration,
-      location,
-      observation,
-      recomendation,
       reference,
-      reportImage
+      requester,
+      title,
+      location,
+      startText,
+      endText,
+      reportItem
     } = report
 
     formData.append('costumer', costumer.toString())
+    formData.append('requester', requester)
+    formData.append('title', title)
     formData.append('reference', reference)
     formData.append('location', location)
-    formData.append('observation', observation)
-    formData.append('recomendation', recomendation)
-    formData.append('consideration', consideration)
-    if (reportImage) {
-      reportImage.forEach(item => appendItem(item, formData))
+    formData.append('startText', startText)
+    formData.append('endText', endText)
+    if (reportItem) {
+      reportItem.forEach(item => appendItem(item, formData))
     }
 
     await api.post('/report', formData)

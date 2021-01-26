@@ -18,7 +18,7 @@ const Bottom: React.FC = () => {
 
     setReport({
       ...report,
-      reportImage: reportItems.map(item => {
+      reportItem: reportItems.map(item => {
         return {
           image: item.uploadedFile?.file,
           subtitle: item.subtitle

@@ -26,3 +26,10 @@ export const ListItemsContainer = styled(Paper)`
 export const StepThreeContainer = styled(Paper)`
   height: 100%;
 `
+export const ReportsContainer = styled(Paper)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 80px;
+`

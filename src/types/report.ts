@@ -3,13 +3,15 @@ export interface ReportItem {
   image?: File
 }
 export interface Report {
+  id: number
   costumer: number
+  title: string
+  requester: string
   reference: string
   location: string
-  observation: string
-  recomendation: string
-  consideration: string
-  reportImage?: ReportItem[]
+  startText: string
+  endText: string
+  reportItem?: ReportItem[]
 }
 
 export interface IReportItem {

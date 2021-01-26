@@ -11,7 +11,7 @@ export const Container = styled.div`
 `
 
 export const FormTwo = styled.form`
-  width: 60%;
+  width: 80%;
   height: 100%;
 
   padding: 50px 100px;
@@ -19,18 +19,12 @@ export const FormTwo = styled.form`
   display: flex;
   flex-direction: column;
 `
-export const Editors = styled.div`
-  display: flex;
-  height: 100%;
-  margin-bottom: 80px;
-  flex-direction: column;
-  justify-content: space-between;
-`
 
 export const EditorContainer = styled.div`
   width: 100%;
-  height: 150px;
-  margin-bottom: 20px;
+  height: 70%;
+  display: flex;
+  margin-bottom: 80px;
 `
 export const Editor = styled(ReactQuill)`
   width: 100%;

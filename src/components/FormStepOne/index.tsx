@@ -8,7 +8,7 @@ import { Button } from 'components/UI'
 import { ICostumer } from 'types/costumer'
 import Input from 'components/InputUnform'
 import Select from 'components/SelectUnform'
-import { getEditorData } from 'utils/report'
+import { getEditorData, setEditorData } from 'utils/report'
 
 import { Container, Editor, EditorContainer, FormOne, Inputs } from './styles'
 
@@ -26,32 +26,36 @@ const FormStepOne: React.FC = () => {
 
   const [costumers, setCostumers] = useState([])
   const handleSubmit: SubmitHandler<FormData> = data => {
-    const observationData = getEditorData(editorRef)
+    const startTextData = getEditorData(editorRef)
 
     const { costumer, location, reference } = data
 
-    const observation = JSON.stringify(observationData, null, 4)
+    const startText = JSON.stringify(startTextData, null, 4)
 
     setReport({
       ...report,
       costumer: Number(costumer),
       location,
       reference,
-      observation
+      startText
     })
 
     navigate('/report/create/step2')
   }
 
   useEffect(() => {
+    if (report.startText) {
+      setEditorData(editorRef, JSON.parse(report.startText))
+    }
+
     async function fetchCostumers() {
       try {
         const fetchCostumers = await api.get('/costumer')
-        setCostumers(fetchCostumers.data.costumers)
-      } catch (e) {}
+        setCostumers(fetchCostumers.data)
+      } catch {}
     }
     fetchCostumers()
-  }, [])
+  }, [report.startText])
 
   return (
     <Container>
@@ -66,20 +70,38 @@ const FormStepOne: React.FC = () => {
             placeholder={'Cliente'}
             isSearchable
           />
-          <Input name="location" label="Local" variant="outlined" />
-          <Input name="reference" label="Referencia" variant="outlined" />
-          <EditorContainer>
-            <Editor
-              ref={editorRef}
-              theme="snow"
-              placeholder={'Texto Inicial'}
-            />
-          </EditorContainer>
+          <Input
+            name="title"
+            label="Titulo"
+            variant="outlined"
+            defaultValue={report.title}
+          />
+          <Input
+            name="requester"
+            label="Solicitante"
+            variant="outlined"
+            defaultValue={report.requester}
+          />
+          <Input
+            name="location"
+            label="Local"
+            variant="outlined"
+            defaultValue={report.location}
+          />
+          <Input
+            name="reference"
+            label="Referencia"
+            variant="outlined"
+            defaultValue={report.reference}
+          />
         </Inputs>
         <Button type="submit" size={'large'}>
           Avançar
         </Button>
       </FormOne>
+      <EditorContainer>
+        <Editor ref={editorRef} theme="snow" placeholder={'Texto Inicial'} />
+      </EditorContainer>
     </Container>
   )
 }
